@@ -6,8 +6,8 @@ class User < ApplicationRecord
 
   REGEX_VALID = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i.freeze
 
-  validates :email, presence: true, length: { maximum: 255 }, 
-  format: { with: REGEX_VALID }, uniqueness: { case_sensitive: true }
+  validates :email, presence: true, length: { maximum: 255 },
+            format: { with: REGEX_VALID }, uniqueness: { case_sensitive: true }
 
   # associations
   has_many :posts
