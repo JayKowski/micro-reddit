@@ -2,7 +2,7 @@
 
 class PostsController < ApplicationController
   before_action :set_post, only: %i[show edit update destroy]
-  before_action :my_user, only: %i[new edit update create] 
+  before_action :my_user, only: %i[new edit update create]
 
   # GET /posts
   # GET /posts.json
