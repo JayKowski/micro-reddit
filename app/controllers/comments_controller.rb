@@ -2,6 +2,8 @@
 
 class CommentsController < ApplicationController
   before_action :set_comment, only: %i[show edit update destroy]
+  before_action :my_user, only: %i[new edit update create]
+  before_action :my_post, only: %i[new edit update create]
 
   # GET /comments
   # GET /comments.json
@@ -24,8 +26,8 @@ class CommentsController < ApplicationController
   # POST /comments
   # POST /comments.json
   def create
-    @comment = Comment.new(comment_params)
-
+    @comment = @post.comments.new(comment_params)
+    @comment.user = @user
     respond_to do |format|
       if @comment.save
         format.html { redirect_to @comment, notice: 'Comment was successfully created.' }
@@ -66,6 +68,14 @@ class CommentsController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_comment
     @comment = Comment.find(params[:id])
+  end
+
+  def my_user
+    @user = User.find_by(id: 1)
+  end
+
+  def my_post
+    @post = Post.find_by(id: 1)
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
